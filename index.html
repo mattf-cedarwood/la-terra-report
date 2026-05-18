@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>La Terra Court Weekly Progress Report - May 4, 2026</title>
+<title>La Terra Court Weekly Progress Report - May 18, 2026</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
 <style>
@@ -13,15 +13,11 @@
   h1 { font-size: 1.75rem; color: #1e40af; }
   h2 { font-size: 1.35rem; color: #1e40af; margin-bottom: 12px; border-bottom: 2px solid #2563eb; padding-bottom: 6px; }
   h3 { font-size: 1.1rem; color: #334155; margin-bottom: 8px; }
-
-  /* Header */
   .report-header { background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%); color: #fff; padding: 28px 32px; border-radius: 12px; margin-top: 16px; margin-bottom: 8px; }
   .report-header h1 { color: #fff; font-size: 1.85rem; }
   .report-header p { opacity: 0.9; margin-top: 4px; }
   .header-meta { display: flex; gap: 32px; margin-top: 12px; flex-wrap: wrap; }
   .header-meta span { background: rgba(255,255,255,0.18); padding: 4px 14px; border-radius: 6px; font-size: 0.88rem; }
-
-  /* Sticky Notes */
   .sticky-panel { position: sticky; top: 0; z-index: 100; background: #f9f3e6; border-bottom: 3px solid #d4a843; padding: 14px 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); transition: max-height 0.3s ease; }
   .sticky-panel.collapsed .sticky-body { display: none; }
   .sticky-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
@@ -35,8 +31,6 @@
   .btn-outline { background: transparent; border: 2px solid #d97706; color: #92400e; }
   .btn-outline:hover { background: #fef3c7; }
   .sticky-btns { display: flex; gap: 8px; flex-wrap: wrap; }
-
-  /* Cards */
   .cards-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 20px 0; }
   .card { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid #2563eb; }
   .card-lot3 { border-top-color: #2563eb; }
@@ -45,11 +39,7 @@
   .card .label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; }
   .card .value { font-size: 2rem; font-weight: 700; color: #1e40af; }
   .card .sub { font-size: 0.85rem; color: #475569; margin-top: 4px; }
-
-  /* Section */
   .section { background: #fff; border-radius: 12px; padding: 24px; margin: 20px 0; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-
-  /* Progress bars */
   .phase-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
   .phase-label { width: 220px; font-size: 0.88rem; font-weight: 500; flex-shrink: 0; }
   .phase-bar-wrap { flex: 1; background: #e2e8f0; border-radius: 8px; height: 22px; position: relative; overflow: hidden; }
@@ -63,87 +53,42 @@
   .badge-red { background: #fee2e2; color: #991b1b; }
   .badge-gray { background: #e2e8f0; color: #475569; }
   .badge-blue { background: #dbeafe; color: #1e40af; }
-
-  /* Gantt */
   .gantt-wrap { position: relative; height: 320px; margin-top: 12px; }
-
-  /* Issues */
   .issue-card { border-left: 4px solid; padding: 12px 16px; margin-bottom: 10px; border-radius: 0 8px 8px 0; background: #f8fafc; }
   .issue-critical { border-color: #dc2626; background: #fef2f2; }
   .issue-warning { border-color: #f59e0b; background: #fffbeb; }
   .issue-info { border-color: #2563eb; background: #eff6ff; }
-
-  /* Tables */
   table { width: 100%; border-collapse: collapse; }
   th { background: #1e40af; color: #fff; padding: 10px 14px; text-align: left; font-size: 0.85rem; }
   td { padding: 10px 14px; border-bottom: 1px solid #e2e8f0; font-size: 0.85rem; }
   tr:hover td { background: #f1f5f9; }
-
-  /* Side by side */
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
-  /* Action items */
-  .action-list { counter-reset: action; }
   .action-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid #f1f5f9; align-items: flex-start; }
   .action-num { background: #2563eb; color: #fff; min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; flex-shrink: 0; }
   .action-text { font-size: 0.88rem; }
   .action-due { font-size: 0.78rem; color: #dc2626; font-weight: 600; }
-
-  /* Milestones */
   .milestone { display: flex; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
   .ms-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
   .ms-done { background: #10b981; }
   .ms-upcoming { background: #2563eb; }
   .ms-critical { background: #dc2626; }
-
-  /* WoW changes */
   .wow-item { padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
   .wow-badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; margin-right: 8px; }
   .wow-new { background: #d1fae5; color: #065f46; }
   .wow-update { background: #dbeafe; color: #1e40af; }
   .wow-risk { background: #fee2e2; color: #991b1b; }
   .wow-info { background: #e2e8f0; color: #475569; }
-
-  /* Critical path */
-  .cp-item { padding: 10px 0; border-bottom: 1px solid #f1f5f9; }
-  .cp-status { font-weight: 700; font-size: 0.82rem; }
-  .cp-status.ordered { color: #059669; }
-  .cp-status.pricing { color: #d97706; }
-  .cp-status.eval { color: #2563eb; }
-  .cp-status.quotes { color: #7c3aed; }
-  .cp-status.engaged { color: #0891b2; }
-
-  /* Footer */
   .footer { text-align: center; padding: 24px; color: #64748b; font-size: 0.82rem; border-top: 2px solid #e2e8f0; margin-top: 32px; }
-
-  /* Photo placeholder */
   .photo-placeholder { background: #f1f5f9; border: 2px dashed #cbd5e1; border-radius: 12px; padding: 40px; text-align: center; color: #94a3b8; font-style: italic; }
-
-  /* Milestone badge */
-  .milestone-banner { background: linear-gradient(135deg, #059669 0%, #10b981 100%); color: #fff; padding: 16px 24px; border-radius: 12px; margin: 20px 0; text-align: center; box-shadow: 0 2px 8px rgba(5,150,105,0.3); }
+  .milestone-banner { background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%); color: #fff; padding: 16px 24px; border-radius: 12px; margin: 20px 0; text-align: center; box-shadow: 0 2px 8px rgba(37,99,235,0.3); }
   .milestone-banner h2 { color: #fff; border-bottom: none; margin-bottom: 4px; }
   .milestone-banner p { opacity: 0.95; }
-
-  /* Print */
-  @media print {
-    .sticky-panel { position: relative !important; }
-    .no-print { display: none !important; }
-    body { background: #fff; }
-    .section, .card { box-shadow: none; border: 1px solid #e2e8f0; break-inside: avoid; }
-    .milestone-banner { break-inside: avoid; }
-  }
-  @media (max-width: 900px) {
-    .cards-row { grid-template-columns: 1fr; }
-    .two-col { grid-template-columns: 1fr; }
-    .sticky-body { grid-template-columns: 1fr; }
-    .phase-row { flex-wrap: wrap; }
-    .phase-label { width: 100%; }
-  }
+  @media print { .sticky-panel { position: relative !important; } .no-print { display: none !important; } body { background: #fff; } .section, .card { box-shadow: none; border: 1px solid #e2e8f0; break-inside: avoid; } .milestone-banner { break-inside: avoid; } }
+  @media (max-width: 900px) { .cards-row { grid-template-columns: 1fr; } .two-col { grid-template-columns: 1fr; } .sticky-body { grid-template-columns: 1fr; } .phase-row { flex-wrap: wrap; } .phase-label { width: 100%; } }
 </style>
 </head>
 <body>
 
-<!-- STICKY NOTES PANEL -->
 <div class="sticky-panel" id="stickyPanel">
   <div class="sticky-header">
     <h3>Meeting Notes &amp; Quick Capture</h3>
@@ -155,323 +100,300 @@
     </div>
   </div>
   <div class="sticky-body" id="stickyBody">
-    <div>
-      <label for="noteMeeting">Meeting Notes</label>
-      <textarea id="noteMeeting" placeholder="Capture meeting notes here..."></textarea>
-    </div>
-    <div>
-      <label for="noteHumair">Questions for Humair</label>
-      <textarea id="noteHumair" placeholder="Questions to raise with Humair..."></textarea>
-    </div>
-    <div>
-      <label for="noteThoughts">My Thoughts</label>
-      <textarea id="noteThoughts" placeholder="Personal observations and ideas..."></textarea>
-    </div>
-    <div>
-      <label for="noteChanges">Changes for Next Report</label>
-      <textarea id="noteChanges" placeholder="Items to update in next week's report..."></textarea>
-    </div>
+    <div><label for="noteMeeting">Meeting Notes (Week 29 &mdash; May 18)</label><textarea id="noteMeeting" placeholder="Capture this week's meeting notes here..."></textarea></div>
+    <div><label for="noteHumair">Questions for Humair</label><textarea id="noteHumair" placeholder="Questions to raise with Humair..."></textarea></div>
+    <div><label for="noteThoughts">My Thoughts</label><textarea id="noteThoughts" placeholder="Personal observations and ideas..."></textarea></div>
+    <div><label for="noteChanges">Changes for Next Report</label><textarea id="noteChanges" placeholder="Items to update in next week's report..."></textarea></div>
   </div>
 </div>
 
 <div class="container">
 
-<!-- HEADER -->
 <div class="report-header">
   <h1>La Terra Court &mdash; Weekly Progress Report</h1>
   <p>Luxury Residential Development, Los Gatos, CA</p>
   <div class="header-meta">
-    <span>Report Date: May 4, 2026</span>
+    <span>Report Date: May 18, 2026</span>
     <span>Greenridge Terrace Development LLC</span>
     <span>Prepared for: Matt Fistonich</span>
-    <span>Week #27</span>
+    <span>Week #29 (May 12&ndash;May 18)</span>
   </div>
 </div>
 
-<!-- MAJOR MILESTONE BANNER -->
 <div class="milestone-banner">
-  <h2>MILESTONE: Lot 3 Frame &amp; Structural Inspections PASSED &mdash; May 1, 2026</h2>
-  <p>Cleared for mechanicals. MEP Plan Review Meeting scheduled May 11 (9am&ndash;12pm) with all subs.</p>
+  <h2>THIS WEEK: Cabinet Package Locked &amp; Smart LV STARTED</h2>
+  <p>Quetzal field-measured cabinet order locked Thu May 14 (ships mid-October). Coast Lighting Smart LV approved Tue May 12 &mdash; materials to Fabian, 50% deposit triggered. Title 24 solar VE coming in $10K UNDER allowance. Mark back on site week of June 7 for MEP re-walk + drywall blockout.</p>
 </div>
 
-<!-- DASHBOARD CARDS -->
 <div class="cards-row">
   <div class="card card-lot3">
     <div class="label">Lot 3 &mdash; 250 La Terra Ct</div>
-    <div class="value">~18%</div>
-    <div class="sub">Overall Complete <span class="badge badge-green">&uarr; from ~15%</span></div>
+    <div class="value">~22%</div>
+    <div class="sub">Overall Complete <span class="badge badge-green">&uarr; from ~20%</span></div>
     <div style="margin-top:10px; font-size:0.85rem;">
-      <strong>Phase:</strong> Framing COMPLETE &rarr; Mechanicals starting<br>
-      <strong>Status:</strong> Frame &amp; structural inspections passed May 1 &mdash; cleared for mechanicals. MEP plan review meeting scheduled May 11 (9am&ndash;12pm) with subs.<br>
-      <strong>Fireplace:</strong> Plans approved. Solar proposal initiated (Soleeva Energy).<br>
+      <strong>Phase:</strong> Pre-rough-in &mdash; spec locks &amp; procurement<br>
+      <strong>Status:</strong> Field-measured cabinet layouts sent to Quetzal (May 14). Plumbing &amp; appliance spec binders from Abode Maison distributed to Humair/Khurram (May 12). Coast Lighting Smart LV approved &amp; started.<br>
       <strong>Target:</strong> ~Apr 2027
     </div>
   </div>
   <div class="card card-lot7">
     <div class="label">Lot 7 &mdash; 15460 Santella Dr</div>
-    <div class="value">~7%</div>
+    <div class="value">~9%</div>
     <div class="sub">Overall Complete <span class="badge badge-red">~30 DAYS BEHIND</span></div>
     <div style="margin-top:10px; font-size:0.85rem;">
       <strong>Phase:</strong> Foundation (in progress)<br>
-      <strong>Status:</strong> Progress photos shared Apr 29 via Dropbox.
+      <strong>Status:</strong> No Lot-7-specific emails this week. Foundation continues. Recovery plan still owed by Humair.
     </div>
   </div>
   <div class="card card-days">
     <div class="label">Days Since Construction Start</div>
-    <div class="value">217</div>
+    <div class="value">231</div>
     <div class="sub">Since Oct 2025 start</div>
     <div style="margin-top:10px; font-size:0.85rem;">
-      Construction loan active. $50K lien waiver threshold approved by CBC Bank (up from $10K).
+      Construction loan active. $50K lien-waiver threshold (CBC Bank, Beth Swift). Title 24 solar tracking $10K UNDER $45K OA.
     </div>
   </div>
 </div>
 
-<!-- CONSTRUCTION PROGRESS - LOT 3 -->
 <div class="section">
   <h2>Construction Progress &mdash; Lot 3 (250 La Terra Ct)</h2>
-
-  <div class="phase-row">
-    <div class="phase-label">Site Work <span class="badge badge-green">Complete</span></div>
-    <div class="phase-bar-wrap"><div class="phase-bar green" style="width:100%">100%</div></div>
-  </div>
-  <div class="phase-row">
-    <div class="phase-label">Foundation <span class="badge badge-green">Complete</span></div>
-    <div class="phase-bar-wrap"><div class="phase-bar green" style="width:100%">100%</div></div>
-  </div>
-  <div class="phase-row">
-    <div class="phase-label">Framing <span class="badge badge-green">Complete</span></div>
-    <div class="phase-bar-wrap"><div class="phase-bar green" style="width:100%">100%</div></div>
-  </div>
-  <div class="phase-row">
-    <div class="phase-label">Windows <span class="badge badge-blue">Delivery imminent</span></div>
-    <div class="phase-bar-wrap"><div class="phase-bar blue" style="width:85%">85%</div></div>
-  </div>
-  <div class="phase-row">
-    <div class="phase-label">Roofing <span class="badge badge-blue">Sheathing in progress</span></div>
-    <div class="phase-bar-wrap"><div class="phase-bar blue" style="width:70%">70%</div></div>
-  </div>
-  <div class="phase-row">
-    <div class="phase-label">MEP Rough-In <span class="badge badge-blue">Starting</span></div>
-    <div class="phase-bar-wrap"><div class="phase-bar blue" style="width:5%">5%</div></div>
-  </div>
-  <div class="phase-row">
-    <div class="phase-label">Fireplace <span class="badge badge-blue">Plans approved</span></div>
-    <div class="phase-bar-wrap"><div class="phase-bar blue" style="width:15%">15%</div></div>
-  </div>
-  <div class="phase-row">
-    <div class="phase-label">Plumbing Selections <span class="badge badge-blue">Advancing</span></div>
-    <div class="phase-bar-wrap"><div class="phase-bar blue" style="width:75%">75%</div></div>
-  </div>
-  <div class="phase-row">
-    <div class="phase-label">Electrical Fixtures <span class="badge badge-blue">Ra3 pricing pending</span></div>
-    <div class="phase-bar-wrap"><div class="phase-bar blue" style="width:50%">50%</div></div>
-  </div>
-  <div class="phase-row">
-    <div class="phase-label">Solar <span class="badge badge-blue">NEW &mdash; Proposal initiated</span></div>
-    <div class="phase-bar-wrap"><div class="phase-bar blue" style="width:5%">5%</div></div>
-  </div>
-  <div class="phase-row">
-    <div class="phase-label">Insulation <span class="badge badge-gray">Not started</span></div>
-    <div class="phase-bar-wrap"><div class="phase-bar gray" style="width:0%;min-width:0;"><span style="position:absolute;left:8px;color:#64748b;">0%</span></div></div>
-  </div>
-  <div class="phase-row">
-    <div class="phase-label">Drywall <span class="badge badge-gray">Not started</span></div>
-    <div class="phase-bar-wrap"><div class="phase-bar gray" style="width:0%;min-width:0;"><span style="position:absolute;left:8px;color:#64748b;">0%</span></div></div>
-  </div>
-  <div class="phase-row">
-    <div class="phase-label">Interior Finish <span class="badge badge-gray">Not started</span></div>
-    <div class="phase-bar-wrap"><div class="phase-bar gray" style="width:0%;min-width:0;"><span style="position:absolute;left:8px;color:#64748b;">0%</span></div></div>
-  </div>
-  <div class="phase-row">
-    <div class="phase-label">Landscape <span class="badge badge-blue">Repricing</span></div>
-    <div class="phase-bar-wrap"><div class="phase-bar blue" style="width:10%">10%</div></div>
-  </div>
+  <div class="phase-row"><div class="phase-label">Site Work <span class="badge badge-green">Complete</span></div><div class="phase-bar-wrap"><div class="phase-bar green" style="width:100%">100%</div></div></div>
+  <div class="phase-row"><div class="phase-label">Foundation <span class="badge badge-green">Complete</span></div><div class="phase-bar-wrap"><div class="phase-bar green" style="width:100%">100%</div></div></div>
+  <div class="phase-row"><div class="phase-label">Framing <span class="badge badge-green">Complete</span></div><div class="phase-bar-wrap"><div class="phase-bar green" style="width:100%">100%</div></div></div>
+  <div class="phase-row"><div class="phase-label">Windows <span class="badge badge-blue">Delivery imminent</span></div><div class="phase-bar-wrap"><div class="phase-bar blue" style="width:90%">90%</div></div></div>
+  <div class="phase-row"><div class="phase-label">Roofing <span class="badge badge-blue">Sheathing in progress</span></div><div class="phase-bar-wrap"><div class="phase-bar blue" style="width:78%">78%</div></div></div>
+  <div class="phase-row"><div class="phase-label">Cabinet Field Measurements <span class="badge badge-green">LOCKED to Quetzal May 14</span></div><div class="phase-bar-wrap"><div class="phase-bar green" style="width:100%">100%</div></div></div>
+  <div class="phase-row"><div class="phase-label">Electric/MEP E-Plan + LV <span class="badge badge-green">FINAL released May 9</span></div><div class="phase-bar-wrap"><div class="phase-bar green" style="width:100%">100%</div></div></div>
+  <div class="phase-row"><div class="phase-label">MEP Walk-Through <span class="badge badge-green">Completed May 11</span></div><div class="phase-bar-wrap"><div class="phase-bar green" style="width:100%">100%</div></div></div>
+  <div class="phase-row"><div class="phase-label">Plumbing/Appliance Specs <span class="badge badge-green">Distributed May 12</span></div><div class="phase-bar-wrap"><div class="phase-bar green" style="width:100%">100%</div></div></div>
+  <div class="phase-row"><div class="phase-label">MEP Rough-In <span class="badge badge-blue">Layout signed; spec lock-in</span></div><div class="phase-bar-wrap"><div class="phase-bar blue" style="width:18%">18%</div></div></div>
+  <div class="phase-row"><div class="phase-label">Fireplace Cabinetry (Great Room) <span class="badge badge-blue">Revised plan w/ Kohlsaat May 12</span></div><div class="phase-bar-wrap"><div class="phase-bar blue" style="width:35%">35%</div></div></div>
+  <div class="phase-row"><div class="phase-label">Plumbing Selections <span class="badge badge-blue">Spec locked; rough-in pending</span></div><div class="phase-bar-wrap"><div class="phase-bar blue" style="width:88%">88%</div></div></div>
+  <div class="phase-row"><div class="phase-label">Electrical Fixtures (Coast Lighting) <span class="badge badge-green">Smart LV approved &amp; started</span></div><div class="phase-bar-wrap"><div class="phase-bar blue" style="width:65%">65%</div></div></div>
+  <div class="phase-row"><div class="phase-label">Domestic Water Pressure (VE) <span class="badge badge-blue">Mark/Khurram in flight</span></div><div class="phase-bar-wrap"><div class="phase-bar blue" style="width:30%">30%</div></div></div>
+  <div class="phase-row"><div class="phase-label">Solar (Title 24) <span class="badge badge-green">VE: $10K UNDER allowance</span></div><div class="phase-bar-wrap"><div class="phase-bar blue" style="width:25%">25%</div></div></div>
+  <div class="phase-row"><div class="phase-label">Stair Skeleton (Milan) <span class="badge badge-amber">Site delivery: 2H June</span></div><div class="phase-bar-wrap"><div class="phase-bar blue" style="width:15%">15%</div></div></div>
+  <div class="phase-row"><div class="phase-label">Tile Selections <span class="badge badge-blue">Niches/seats/alcoves located</span></div><div class="phase-bar-wrap"><div class="phase-bar blue" style="width:15%">15%</div></div></div>
+  <div class="phase-row"><div class="phase-label">Insulation <span class="badge badge-gray">Not started</span></div><div class="phase-bar-wrap"><div class="phase-bar gray" style="width:0%;min-width:0;"><span style="position:absolute;left:8px;color:#64748b;">0%</span></div></div></div>
+  <div class="phase-row"><div class="phase-label">Drywall <span class="badge badge-gray">Not started</span></div><div class="phase-bar-wrap"><div class="phase-bar gray" style="width:0%;min-width:0;"><span style="position:absolute;left:8px;color:#64748b;">0%</span></div></div></div>
+  <div class="phase-row"><div class="phase-label">Interior Finish <span class="badge badge-gray">Not started</span></div><div class="phase-bar-wrap"><div class="phase-bar gray" style="width:0%;min-width:0;"><span style="position:absolute;left:8px;color:#64748b;">0%</span></div></div></div>
+  <div class="phase-row"><div class="phase-label">Landscape <span class="badge badge-blue">Repricing in progress</span></div><div class="phase-bar-wrap"><div class="phase-bar blue" style="width:12%">12%</div></div></div>
 </div>
 
-<!-- CONSTRUCTION PROGRESS - LOT 7 -->
 <div class="section">
   <h2>Construction Progress &mdash; Lot 7 (15460 Santella Dr)</h2>
-  <div class="phase-row">
-    <div class="phase-label">Site Work <span class="badge badge-green">Complete</span></div>
-    <div class="phase-bar-wrap"><div class="phase-bar green" style="width:100%">100%</div></div>
-  </div>
-  <div class="phase-row">
-    <div class="phase-label">Foundation <span class="badge badge-blue">In progress</span></div>
-    <div class="phase-bar-wrap"><div class="phase-bar blue" style="width:60%">60%</div></div>
-  </div>
-  <div style="margin-top:12px; font-size:0.88rem; color:#475569;">
-    Progress photos shared Apr 29 via Dropbox. Foundation work continuing. <span class="badge badge-red">~30 days behind schedule</span>
-  </div>
+  <div class="phase-row"><div class="phase-label">Site Work <span class="badge badge-green">Complete</span></div><div class="phase-bar-wrap"><div class="phase-bar green" style="width:100%">100%</div></div></div>
+  <div class="phase-row"><div class="phase-label">Foundation <span class="badge badge-blue">In progress</span></div><div class="phase-bar-wrap"><div class="phase-bar blue" style="width:68%">68%</div></div></div>
+  <div style="margin-top:12px; font-size:0.88rem; color:#475569;">No material progress updates emailed this week. Lot 7 remains ~30 days behind Lot 3. Humair recovery plan still owed. <span class="badge badge-red">~30 days behind</span></div>
 </div>
 
-<!-- GANTT CHARTS -->
+<div class="section">
+  <h2>Other Lots Status (Lots 1, 2, 4, 8)</h2>
+  <div style="overflow-x:auto;"><table>
+    <thead><tr><th>Lot</th><th>Address</th><th>Current Status</th><th>This Week (May 12&ndash;18)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Lot 0</strong></td><td>Monuments / Entrance</td><td>Repricing landscape with Stringham Design</td><td>No new updates this week.</td></tr>
+      <tr><td><strong>Lot 1</strong></td><td>16300 Greenridge Terr</td><td>LLA / PSA pending</td><td>Weed-abatement: Matt emailed Estrada for annual tree-service quote. Awaiting response.</td></tr>
+      <tr><td><strong>Lot 2</strong></td><td>240 La Terra Ct</td><td>LLA / PSA pending</td><td>No new updates this week.</td></tr>
+      <tr><td><strong>Lot 4</strong></td><td>230 La Terra Ct</td><td>Pricing exploration; Apex declined</td><td><span class="badge badge-info">INFO</span> VE water-pressure work on Lot 3 will be applied here.</td></tr>
+      <tr><td><strong>Lot 5</strong></td><td>(future)</td><td>VE water-pressure co-pilot</td><td><span class="badge badge-info">INFO</span> Mark/Khurram VE applied at Lots 3, 4, 5.</td></tr>
+      <tr><td><strong>Lot 8</strong></td><td>Francis Oaks access (APN 527-12-010)</td><td>Permit filing in progress</td><td>Weed-abatement folded into Estrada quote request.</td></tr>
+    </tbody>
+  </table></div>
+</div>
+
 <div class="section">
   <h2>Project Timeline &mdash; Gantt View</h2>
   <div class="two-col">
-    <div>
-      <h3>Lot 3 &mdash; 250 La Terra Ct</h3>
-      <div class="gantt-wrap"><canvas id="ganttLot3"></canvas></div>
-    </div>
-    <div>
-      <h3>Lot 7 &mdash; 15460 Santella Dr</h3>
-      <div class="gantt-wrap"><canvas id="ganttLot7"></canvas></div>
-    </div>
+    <div><h3>Lot 3 &mdash; 250 La Terra Ct</h3><div class="gantt-wrap"><canvas id="ganttLot3"></canvas></div></div>
+    <div><h3>Lot 7 &mdash; 15460 Santella Dr</h3><div class="gantt-wrap"><canvas id="ganttLot7"></canvas></div></div>
   </div>
 </div>
 
-<!-- WEEK-OVER-WEEK CHANGES -->
 <div class="section">
-  <h2>Week-over-Week Changes (Apr 27 &rarr; May 4)</h2>
-
-  <div class="wow-item"><span class="wow-badge wow-new">NEW</span> <strong>LOT 3 FRAME &amp; STRUCTURAL INSPECTIONS PASSED (May 1)</strong> &mdash; Cleared to start mechanicals. This is a <strong>MAJOR MILESTONE</strong>.</div>
-
-  <div class="wow-item"><span class="wow-badge wow-new">NEW</span> <strong>MEP Plan Review Meeting May 11 (9am&ndash;12pm)</strong> &mdash; Humair will have most subs present for full MEP coordination.</div>
-
-  <div class="wow-item"><span class="wow-badge wow-new">NEW</span> <strong>Fireplace Plans Approved</strong> &mdash; Velor Lex S4 (great room, projected, side glass) + Velor Lex VS4 (game room, flush). Efrain (Penguin Fireplace) confirmed plans good, hardwired electrical. Mark sent W-9/ACH vendor setup forms. Upstairs: Birch log kit. Downstairs: Split Wood kit.</div>
-
-  <div class="wow-item"><span class="wow-badge wow-new">NEW</span> <strong>Solar Proposal Initiated</strong> &mdash; Soleeva Energy (Yen Nguyen) reviewing plans for Title 24 minimum (4.66KW + 10KW battery). Mark exploring strategy to incentivize end-user to expand system with tax credits.</div>
-
-  <div class="wow-item"><span class="wow-badge wow-new">NEW</span> <strong>Highlands Neighbors Critical Date: May 30</strong> &mdash; No construction activity on Saturday May 30. Neighbor community event 11am&ndash;4pm. H-HOA also requesting La Terra marketing materials for interested buyers.</div>
-
-  <div class="wow-item"><span class="wow-badge wow-update">UPDATE</span> <strong>Plumbing Selections Advancing</strong> &mdash; RJ (Abode Maison) met with Wolf Apr 29, preparing custom detailed binders (PDF + hard copies for job site). Mark added articulated pot filler matching CA Corsano sink faucet. Flagged: any rough-in valve lead times &gt;2 weeks need immediate notification.</div>
-
-  <div class="wow-item"><span class="wow-badge wow-update">UPDATE</span> <strong>Bank Draw Threshold Resolved</strong> &mdash; CBC Bank (Beth Swift) approved $50K threshold for subcontractor lien waivers (up from $10K). Dixieline notified.</div>
-
-  <div class="wow-item"><span class="wow-badge wow-update">UPDATE</span> <strong>Lot 8 Prelim Title Report</strong> &mdash; Fresh prelim (APN 527-12-010, 15470 Santella Dr) sent to Amanda (Hanna Brunetti) for permit filing. Mark asking about Lot 1 &amp; Lot 2 prelim shelf life from LLA.</div>
-
-  <div class="wow-item"><span class="wow-badge wow-update">UPDATE</span> <strong>Entrance Monument &amp; Landscape</strong> &mdash; Bill Schneider coordinating with Humair on repricing Santella Court entrance using new Stringham Design plans. Costs split: Rock Ridge-La Terra common elements vs original David Fox plan for HOA purposes.</div>
-
-  <div class="wow-item"><span class="wow-badge wow-update">UPDATE</span> <strong>Electrical Fixtures</strong> &mdash; Coast Lighting (Greg Belyavski) working on Ra3 pricing. Mark needs this to finalize mounted fixture budget and RA3 vs standard controls allocation. Humair asked to split standards vs RA3 estimate.</div>
-
-  <div class="wow-item"><span class="wow-badge wow-update">UPDATE</span> <strong>Progress Photos Shared</strong> &mdash; Mark shared Dropbox links for Lot 3 and Lot 7 progress photos (Apr 29).</div>
-
-  <div class="wow-item"><span class="wow-badge wow-info">INFO</span> <strong>Apex Design Build Inquiry</strong> &mdash; Joseph Murillo (Apex Design Build) asking to price out the 230 La Terra Ct (Lot 4) project.</div>
+  <h2>Week-over-Week Changes (May 12 &rarr; May 18)</h2>
+  <div class="wow-item"><span class="wow-badge wow-new">NEW</span> <strong>Coast Lighting Smart LV &mdash; APPROVED &amp; STARTED (May 12)</strong> &mdash; Mark approved Coast Lighting's revised Smart LV quote: "Lets go ahead and get started with this and get the materials to Fabian." Added 4 internet/data repeaters. Coast to send updated Smart coverage map and revised material list. 50% deposit triggered. Vendor packet (W-9 + ACH + COI) sent. Blinds: Cedarwood will purchase &amp; install Great Room and Primary Bedroom only; rest of house priced separately.</div>
+  <div class="wow-item"><span class="wow-badge wow-new">NEW</span> <strong>Plumbing &amp; Appliance Spec Binders &mdash; Distributed (May 12)</strong> &mdash; RJ Contreras (Abode Maison) delivered full PDF binders. Mark forwarded to Humair + Khurram with 7 field-direction items: range hood 36" above range top + make-up-air check; articulated pot filler centered on range/hood wall; two Toto Washlet Aquia 4 toilets with concealed water + power; revised fireplace plans w/ Jaclyn at Kohlsaat; kitchen island depth 70" to 76"; 3 full-extension shower arms ordered; kitchen window-wall GFCI sideways w/ notched sill plate.</div>
+  <div class="wow-item"><span class="wow-badge wow-new">NEW</span> <strong>Field-Measured Cabinet Layouts &mdash; LOCKED to Quetzal (May 14)</strong> &mdash; Mark sent 21 cabinet locations with FF dimensions to Ifat at Quetzal (cc Wolf). <strong>Order shipping mid-October.</strong> Critical addition: Rec Room Wet Bar (140-1/4" FF, item 21). Other revisions: Great Room cabinet/shelf depth reduced to 15"; Kitchen Elev D off by 4" (largest blown dim); Bath #4 vanity top "U" drawer depth reduced for plumbing/structural; all interior doors locked at 8'-0".</div>
+  <div class="wow-item"><span class="wow-badge wow-new">NEW</span> <strong>Title 24 Solar VE &mdash; $10K UNDER Allowance</strong> &mdash; Mark met with local solar contractor. Title 24 mandatory power + DHW system has a $45K allowance; current proposal coming in $10K under. Hot-water system being modified for VE and better storage.</div>
+  <div class="wow-item"><span class="wow-badge wow-update">UPDATE</span> <strong>Domestic Water Pressure System &mdash; VE in Flight</strong> &mdash; Mark and Khurram (6 Sigma) developing better/lower-cost system for Lots 3, 4, 5. LP-tank + water-pressure-pump locations identified; LP excavation being folded into the same $50K water-system allowance (single excavation pass).</div>
+  <div class="wow-item"><span class="wow-badge wow-update">UPDATE</span> <strong>Mark's 6 Sigma Vote of Confidence</strong> &mdash; In May 12 partner follow-up: "MEP team was respectful, flexible, knowledgeable and open to seeking VE... Khurram stepped in with wide knowledge of mechanical systems over Humair's and really gave me a sound board." Caveat: "As with all GCs I am staying vigilant but these guys have avoided a number of open opportunities to skin us."</div>
+  <div class="wow-item"><span class="wow-badge wow-update">UPDATE</span> <strong>Mark Returns Week of June 7</strong> &mdash; Confirmed by Mark: back on site week of June 7 for MEP re-walk + drywall blockout.</div>
+  <div class="wow-item"><span class="wow-badge wow-info">INFO</span> <strong>Fire System (Common Areas) &mdash; Steve Sahadi Update Due Today</strong> &mdash; Mark met with Steve Sahadi on fire-system issues in common areas. Update expected today (May 18).</div>
+  <div class="wow-item"><span class="wow-badge wow-info">INFO</span> <strong>Pool / Hardscape / Landscape Pricing &mdash; Pending Clif</strong> &mdash; Mark formally asked Clif for status in the May 12 follow-up.</div>
+  <div class="wow-item"><span class="wow-badge wow-info">INFO</span> <strong>Tile Selections Begin Next Week</strong> &mdash; Niches, shower seats, and bath alcoves located on Lot 3. Mark will circulate tile layouts next week for partner approval.</div>
+  <div class="wow-item"><span class="wow-badge wow-info">INFO</span> <strong>May 30 No-Construction Date &mdash; Still Live</strong> &mdash; Highlands community event 11am&ndash;4pm. All subs must be notified by May 28.</div>
 </div>
 
-<!-- ISSUES & RISKS -->
 <div class="section">
   <h2>Critical Issues &amp; Risks</h2>
-
-  <div class="issue-card issue-critical">
-    <strong>CRITICAL: Partnership Dynamics</strong>
-    <div style="font-size:0.88rem; margin-top:4px;">Payments stopped approximately 1 year ago. Matt sent direct email to Wolf/Michel/Edward May 1. Situation is sensitive and requires careful handling.</div>
-  </div>
-
-  <div class="issue-card issue-warning">
-    <strong>WARNING: Lot 7 Remains ~30 Days Behind Schedule</strong>
-    <div style="font-size:0.88rem; margin-top:4px;">Foundation phase continues but Lot 7 is approximately 30 days behind Lot 3 due to earlier permit delays and storm damage. Cascading delay affects all subsequent phases.</div>
-  </div>
-
-  <div class="issue-card issue-warning">
-    <strong>WARNING: Plumbing Rough-In Valve Lead Times</strong>
-    <div style="font-size:0.88rem; margin-top:4px;">Mark flagged 2-week maximum lead time to RJ (Abode Maison). Any rough-in valve lead times exceeding 2 weeks require immediate notification to avoid holding up the mechanical rough-in sequence.</div>
-  </div>
-
-  <div class="issue-card issue-info">
-    <strong>INFO: May 30 No-Construction Date</strong>
-    <div style="font-size:0.88rem; margin-top:4px;">Highlands community event 11am&ndash;4pm. All subs must be notified. No construction activity permitted. H-HOA also requesting La Terra marketing materials for interested buyers.</div>
-  </div>
+  <div class="issue-card issue-critical"><strong>CRITICAL: Cabinet Shipping Drives Critical Path &mdash; Mid-October</strong><div style="font-size:0.88rem; margin-top:4px;">Quetzal order locked May 14, ships mid-October. Framing/blocking, plumbing rough-in, shear-wall/drywall sequencing must all hit dates that protect the cabinet install window. Any slip flows directly to cabinet delivery + Rec Room Wet Bar.</div></div>
+  <div class="issue-card issue-warning"><strong>WARNING: Range Hood Make-Up-Air &mdash; Code Question Open</strong><div style="font-size:0.88rem; margin-top:4px;">1100 CFM hood. Mark forgot to confirm with Omar whether make-up-air with blower + damper at RA is still a code requirement given only the dryer and range are gas. Humair / Khurram to coordinate with Omar this week.</div></div>
+  <div class="issue-card issue-warning"><strong>WARNING: Lot 7 Remains ~30 Days Behind &mdash; No Recovery Plan</strong><div style="font-size:0.88rem; margin-top:4px;">No material progress emails this week. Humair recovery plan still owed (carried from Wk 28). Gap will compound if not addressed.</div></div>
+  <div class="issue-card issue-warning"><strong>WARNING: Water Heater Spec Still Open</strong><div style="font-size:0.88rem; margin-top:4px;">Tankless vs tank, mfr, power source still undecided. Humair's plumber to propose; Mark + Matt to approve. Was open in Wk 28 &mdash; still open.</div></div>
+  <div class="issue-card issue-warning"><strong>WARNING: Rough-In Valve Delivery Date Still Not Locked</strong><div style="font-size:0.88rem; margin-top:4px;">2-week max guardrail flagged by RJ. Carried from Wk 28. Humair to lock the date this week to avoid bottlenecking mechanical rough-in.</div></div>
+  <div class="issue-card issue-info"><strong>INFO: Quetzal Order Ships Mid-October &mdash; Schedule Anchor</strong><div style="font-size:0.88rem; margin-top:4px;">Cabinet ship date is now a hard anchor for back half of 2026. Frame all rough-trade scheduling against this.</div></div>
+  <div class="issue-card issue-info"><strong>INFO: May 30 No-Construction Date</strong><div style="font-size:0.88rem; margin-top:4px;">Highlands community event 11am&ndash;4pm. All subs must be notified by May 28.</div></div>
 </div>
 
-<!-- UPCOMING KEY DATES -->
 <div class="section">
   <h2>Upcoming Key Dates</h2>
-  <div class="milestone"><div class="ms-dot ms-upcoming"></div><div><strong>May 11</strong> &mdash; MEP Plan Review Meeting (9am&ndash;12pm) &mdash; Full MEP coordination with all subs</div></div>
-  <div class="milestone"><div class="ms-dot ms-upcoming"></div><div><strong>May 28</strong> &mdash; Mark&rsquo;s reminder check-in for May 30 event</div></div>
-  <div class="milestone"><div class="ms-dot ms-critical"></div><div><strong>May 30</strong> &mdash; <strong>NO CONSTRUCTION</strong> &mdash; Highlands community event (11am&ndash;4pm)</div></div>
-  <div class="milestone"><div class="ms-dot ms-upcoming"></div><div><strong>Ongoing</strong> &mdash; Soleeva solar proposal review</div></div>
-  <div class="milestone"><div class="ms-dot ms-upcoming"></div><div><strong>Ongoing</strong> &mdash; RJ plumbing binder completion and pricing</div></div>
-  <div class="milestone"><div class="ms-dot ms-upcoming"></div><div><strong>Ongoing</strong> &mdash; Coast Lighting Ra3 pricing</div></div>
+  <div class="milestone"><div class="ms-dot ms-upcoming"></div><div><strong>May 18 (TODAY)</strong> &mdash; Steve Sahadi fire-system update due.</div></div>
+  <div class="milestone"><div class="ms-dot ms-upcoming"></div><div><strong>This week</strong> &mdash; Coast Lighting 50% deposit + revised material list + smart coverage map.</div></div>
+  <div class="milestone"><div class="ms-dot ms-upcoming"></div><div><strong>This week</strong> &mdash; Range hood make-up-air confirmation (Omar / Humair / Khurram).</div></div>
+  <div class="milestone"><div class="ms-dot ms-upcoming"></div><div><strong>This week</strong> &mdash; Humair to lock rough-in valve and water-heater spec.</div></div>
+  <div class="milestone"><div class="ms-dot ms-upcoming"></div><div><strong>This week</strong> &mdash; Mark to circulate tile-layout suggestions for partner approval.</div></div>
+  <div class="milestone"><div class="ms-dot ms-critical"></div><div><strong>May 28</strong> &mdash; All subs notified of May 30 no-construction date.</div></div>
+  <div class="milestone"><div class="ms-dot ms-critical"></div><div><strong>May 30</strong> &mdash; <strong>NO CONSTRUCTION</strong> &mdash; Highlands community event (11am&ndash;4pm).</div></div>
+  <div class="milestone"><div class="ms-dot ms-upcoming"></div><div><strong>Week of June 7</strong> &mdash; Mark on site for MEP re-walk + drywall blockout.</div></div>
+  <div class="milestone"><div class="ms-dot ms-upcoming"></div><div><strong>2H June</strong> &mdash; Milan delivers stair skeleton.</div></div>
+  <div class="milestone"><div class="ms-dot ms-critical"></div><div><strong>Mid-October</strong> &mdash; Quetzal cabinet package ships. Anchor for 2H 2026.</div></div>
 </div>
 
-<!-- ACTION ITEMS -->
 <div class="section">
   <h2>Action Items</h2>
-  <div class="action-list">
-    <div class="action-item"><div class="action-num">1</div><div><div class="action-text"><strong>Humair / Subs</strong> &mdash; Prepare for May 11 MEP review meeting. All subcontractors to attend with plans.</div><div class="action-due">Due: May 11</div></div></div>
-    <div class="action-item"><div class="action-num">2</div><div><div class="action-text"><strong>Efrain (Penguin Fireplace)</strong> &mdash; Return W-9/ACH forms and coordinate fireplace order timing with Humair.</div><div class="action-due">Due: ASAP</div></div></div>
-    <div class="action-item"><div class="action-num">3</div><div><div class="action-text"><strong>RJ (Abode Maison)</strong> &mdash; Deliver final plumbing binders (PDF + hard copies). Flag any lead times &gt;2 weeks immediately.</div><div class="action-due">Due: Before May 11</div></div></div>
-    <div class="action-item"><div class="action-num">4</div><div><div class="action-text"><strong>Soleeva / Yen Nguyen</strong> &mdash; Review plans and provide solar proposal (Title 24 minimum 4.66KW + 10KW battery).</div><div class="action-due">Due: Ongoing</div></div></div>
-    <div class="action-item"><div class="action-num">5</div><div><div class="action-text"><strong>Coast Lighting / Greg Belyavski</strong> &mdash; Deliver Ra3 pricing to finalize mounted fixture budget.</div><div class="action-due">Due: Ongoing</div></div></div>
-    <div class="action-item"><div class="action-num">6</div><div><div class="action-text"><strong>Bill Schneider</strong> &mdash; Meet Humair on site for entrance landscape repricing with Stringham Design plans.</div><div class="action-due">Due: Ongoing</div></div></div>
-    <div class="action-item"><div class="action-num">7</div><div><div class="action-text"><strong>Amanda (Hanna Brunetti)</strong> &mdash; Confirm Lot 1 &amp; Lot 2 prelim title report shelf life from LLA.</div><div class="action-due">Due: Ongoing</div></div></div>
-    <div class="action-item"><div class="action-num" style="background:#dc2626;">8</div><div><div class="action-text"><strong>All Subs</strong> &mdash; Must be notified of May 30 no-construction date (Highlands community event).</div><div class="action-due">CRITICAL &mdash; Before May 28</div></div></div>
-  </div>
+  <div class="action-item"><div class="action-num" style="background:#dc2626;">1</div><div><div class="action-text"><strong>Humair / Khurram / Omar</strong> &mdash; Confirm whether make-up-air with blower + damper at RA is a code requirement for the 1100 CFM range hood (gas range + gas dryer only).</div><div class="action-due">Due: This week</div></div></div>
+  <div class="action-item"><div class="action-num" style="background:#dc2626;">2</div><div><div class="action-text"><strong>Humair</strong> &mdash; Lock rough-in valve delivery date (2-week max). Lock Bath #4 tub and shower drain delivery. <em>(Carried from Wk 28.)</em></div><div class="action-due">Due: This week</div></div></div>
+  <div class="action-item"><div class="action-num" style="background:#dc2626;">3</div><div><div class="action-text"><strong>Humair's plumber</strong> &mdash; Propose water-heater spec (tankless vs tank, mfr, power source). Joint review with Mark before purchase. <em>(Carried from Wk 28.)</em></div><div class="action-due">Due: Before rough-in</div></div></div>
+  <div class="action-item"><div class="action-num">4</div><div><div class="action-text"><strong>Coast Lighting (Greg)</strong> &mdash; Send updated Smart coverage map; revised material list; complete vendor packet (W-9 + ACH + COI). Send invoice for 50% deposit.</div><div class="action-due">Due: This week</div></div></div>
+  <div class="action-item"><div class="action-num">5</div><div><div class="action-text"><strong>Coast Lighting (Gabe)</strong> &mdash; Provide rough Lutron window-covering quote for Great Room and Primary Bedroom (2 shades). Price rest of house separately.</div><div class="action-due">Due: This week</div></div></div>
+  <div class="action-item"><div class="action-num">6</div><div><div class="action-text"><strong>Mark + Coast Lighting (Greg)</strong> &mdash; Schedule showroom/catalog walk-through for fan, mounted, hanging fixture selections.</div><div class="action-due">Due: Within 2 weeks</div></div></div>
+  <div class="action-item"><div class="action-num">7</div><div><div class="action-text"><strong>Humair / Khurram</strong> &mdash; Review the 7 plumbing/appliance field-direction items from Mark's May 12 spec-binder fwd.</div><div class="action-due">Due: This week</div></div></div>
+  <div class="action-item"><div class="action-num">8</div><div><div class="action-text"><strong>Mark</strong> &mdash; Deliver Great Room 3-sided projected box stand cabinetry detail.</div><div class="action-due">Due: End of this week</div></div></div>
+  <div class="action-item"><div class="action-num">9</div><div><div class="action-text"><strong>Mark</strong> &mdash; Start circulating tile layouts for niches, shower seats, alcoves.</div><div class="action-due">Due: Next week</div></div></div>
+  <div class="action-item"><div class="action-num">10</div><div><div class="action-text"><strong>Clif</strong> &mdash; Provide status on Pool / Hardscape / Landscape pricing (per Mark's May 12 ask).</div><div class="action-due">Due: This week</div></div></div>
+  <div class="action-item"><div class="action-num">11</div><div><div class="action-text"><strong>Steve Sahadi</strong> &mdash; Update on fire-system common-area issues (expected today, May 18).</div><div class="action-due">Due: Today</div></div></div>
+  <div class="action-item"><div class="action-num">12</div><div><div class="action-text"><strong>Humair</strong> &mdash; Surface Lot 7 schedule recovery plan. <em>(Carried multi-week.)</em></div><div class="action-due">Due: This week</div></div></div>
+  <div class="action-item"><div class="action-num">13</div><div><div class="action-text"><strong>Matt / Estrada</strong> &mdash; Push for Estrada's annual tree-service quote (weed-abatement HOA fix Lots 1 &amp; 8).</div><div class="action-due">Due: This week</div></div></div>
+  <div class="action-item"><div class="action-num" style="background:#dc2626;">14</div><div><div class="action-text"><strong>All Subs</strong> &mdash; Notified of May 30 no-construction date (Highlands community event).</div><div class="action-due">CRITICAL &mdash; Before May 28</div></div></div>
+  <div class="action-item"><div class="action-num">15</div><div><div class="action-text"><strong>Ifat (Quetzal)</strong> &mdash; Confirm final order including new Rec Room Wet Bar line (item 21). Ship mid-October.</div><div class="action-due">Due: Ongoing</div></div></div>
 </div>
 
-<!-- BUDGET SUMMARY -->
+<div class="section">
+  <h2>Material Purchasing &amp; Procurement Status</h2>
+  <div style="overflow-x:auto;"><table>
+    <thead><tr><th>Item</th><th>Vendor / Lead</th><th>Status</th><th>Notes (Wk 29)</th></tr></thead>
+    <tbody>
+      <tr><td>Cabinets &mdash; Field Measurements</td><td>Quetzal (Ifat)</td><td><span class="badge badge-green">LOCKED May 14 &mdash; ships mid-Oct</span></td><td>21 items including new Rec Room Wet Bar.</td></tr>
+      <tr><td>Plumbing &amp; Appliance Specs</td><td>Abode Maison (RJ Contreras)</td><td><span class="badge badge-green">Distributed May 12</span></td><td>Full binders to Humair/Khurram. 7 field items.</td></tr>
+      <tr><td>Smart LV / Lutron RA3</td><td>Coast Lighting (Greg)</td><td><span class="badge badge-green">APPROVED &amp; STARTED May 12</span></td><td>Materials going to Fabian. 50% deposit due.</td></tr>
+      <tr><td>Lutron Window Shades (G. Room + Primary)</td><td>Coast Lighting (Gabe)</td><td><span class="badge badge-blue">Rough quote pending</span></td><td>Cedarwood-purchased + installed. 2 shades total.</td></tr>
+      <tr><td>Internet/Data Repeaters (x4)</td><td>Coast/Fabian (TBD)</td><td><span class="badge badge-blue">Sourcing TBD</span></td><td>Confirm whether Coast or Fabian sources.</td></tr>
+      <tr><td>Recessed Cans (Nora NHIC4MLRAT)</td><td>Coast Lighting (Greg)</td><td><span class="badge badge-blue">Trim options pending</span></td><td>Square trim/baffle options + pricing requested.</td></tr>
+      <tr><td>Mounted/Hanging Fixtures + Fans</td><td>Coast Lighting (Greg)</td><td><span class="badge badge-blue">Showroom walk pending</span></td><td>Mark to schedule walkthrough.</td></tr>
+      <tr><td>Range Hood (1100 CFM)</td><td>Abode Maison + Omar</td><td><span class="badge badge-amber">Make-up-air check open</span></td><td>Mounted 36" above range top. Code Q with Omar.</td></tr>
+      <tr><td>Pot Filler (articulated)</td><td>Abode Maison</td><td><span class="badge badge-green">Spec locked</span></td><td>CL 98-1/4" from frame. Valve stem 18" above range.</td></tr>
+      <tr><td>Toto Washlet Aquia 4 Toilets (x2)</td><td>Abode Maison</td><td><span class="badge badge-green">Spec locked</span></td><td>Concealed water + power install.</td></tr>
+      <tr><td>Shower Arms (3 full-extension)</td><td>Mark / supply house</td><td><span class="badge badge-green">Ordered</span></td><td>Tub + 2 small showers w/ high ceilings.</td></tr>
+      <tr><td>Fireplaces (Velor Lex S4 / VS4)</td><td>Penguin Fireplace (Efrain)</td><td><span class="badge badge-amber">Awaiting delivery date</span></td><td>Revised cabinetry plan issued.</td></tr>
+      <tr><td>Rough-in Valves</td><td>Abode Maison (RJ)</td><td><span class="badge badge-amber">Date pending &mdash; CARRIED</span></td><td>2-week max lead time.</td></tr>
+      <tr><td>Bath #4 Tub + Shower Drains</td><td>Mark / supply house</td><td><span class="badge badge-amber">Split delivery TBD</span></td><td>Vanity U-drawer reduced.</td></tr>
+      <tr><td>Water Heater</td><td>Humair's plumber</td><td><span class="badge badge-amber">Spec pending &mdash; CARRIED</span></td><td>Tankless vs tank still open.</td></tr>
+      <tr><td>Solar (Title 24 + 10KW battery)</td><td>Local solar (VE) + Soleeva</td><td><span class="badge badge-green">$10K UNDER allowance</span></td><td>VE modifying hot water for better storage.</td></tr>
+      <tr><td>LP Tank + Water Pressure System</td><td>Mark + Khurram (VE)</td><td><span class="badge badge-blue">Locations identified</span></td><td>Folded into $50K water-system excavation.</td></tr>
+      <tr><td>Stair Skeleton</td><td>Milan</td><td><span class="badge badge-amber">Site delivery 2H June</span></td><td>Carried.</td></tr>
+      <tr><td>Tile (niches, seats, alcoves)</td><td>Mark</td><td><span class="badge badge-blue">Layouts coming next week</span></td><td>Locations finalized this week.</td></tr>
+    </tbody>
+  </table></div>
+</div>
+
 <div class="section">
   <h2>Budget Summary</h2>
-  <div style="overflow-x:auto;">
-    <table>
-      <thead><tr><th>Item</th><th>Amount</th><th>Notes</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Total Project Loan</strong></td><td style="font-weight:700;">$8,056,462</td><td>Across all 8 lots</td></tr>
-        <tr><td>Lot 3 Loan (250 La Terra Ct)</td><td>$2,864,646</td><td>Active construction</td></tr>
-        <tr><td>Lot 7 Loan (15460 Santella Dr)</td><td>$2,992,275</td><td>Foundation phase</td></tr>
-        <tr><td>Lien Waiver Threshold</td><td>$50,000</td><td>Approved by CBC Bank (up from $10K). Dixieline notified.</td></tr>
-        <tr><td>Next Draw</td><td>TBD</td><td>Preparation in progress</td></tr>
-      </tbody>
-    </table>
-  </div>
+  <h3 style="margin-top:8px;">Project Loan &mdash; All 8 Lots</h3>
+  <div style="overflow-x:auto;"><table>
+    <thead><tr><th>Item</th><th>Amount</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Total Project Loan</strong></td><td style="font-weight:700;">$8,056,462</td><td>Across all 8 lots</td></tr>
+      <tr><td>Lot 3 Loan (250 La Terra Ct)</td><td>$2,864,646</td><td>Active &mdash; pre-rough-in</td></tr>
+      <tr><td>Lot 7 Loan (15460 Santella Dr)</td><td>$2,992,275</td><td>Active &mdash; foundation</td></tr>
+    </tbody>
+  </table></div>
+  <h3 style="margin-top:18px;">Selection Cost Tracker (Budget vs Actual)</h3>
+  <div style="overflow-x:auto;"><table>
+    <thead><tr><th>Selection</th><th>Owner Allowance</th><th>Current Pricing</th><th>Variance</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Solar (Title 24 + DHW)</td><td>$45,000</td><td>~$35,000</td><td style="color:#065f46; font-weight:700;">&minus;$10,000 (UNDER)</td><td>VE in progress</td></tr>
+      <tr><td>Water Pressure System + LP Tank</td><td>$50,000</td><td>Pricing in flight</td><td style="color:#92400e;">TBD</td><td>Single-excavation VE</td></tr>
+      <tr><td>Cabinets (Quetzal)</td><td>(HC line)</td><td>Locked</td><td style="color:#1e40af;">Locked</td><td>Ships mid-Oct</td></tr>
+      <tr><td>Smart LV (Lutron RA3)</td><td>(HC line)</td><td>Approved</td><td style="color:#1e40af;">Locked</td><td>50% deposit due</td></tr>
+      <tr><td>Lutron Shades (G. Room + Primary)</td><td>(Cedarwood spend)</td><td>Pending</td><td>TBD</td><td>Rough quote in flight</td></tr>
+    </tbody>
+  </table></div>
+  <h3 style="margin-top:18px;">Draw &amp; Lien Status</h3>
+  <div style="overflow-x:auto;"><table>
+    <thead><tr><th>Item</th><th>Status</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Lien Waiver Threshold</td><td>$50,000</td><td>Approved by CBC Bank Wk 27. Dixieline notified.</td></tr>
+      <tr><td>Next Draw</td><td>In prep</td><td>Sequenced with Coast Lighting + Quetzal deposits.</td></tr>
+      <tr><td>CBC Bank (Beth Swift)</td><td>Active</td><td>No new lender items this week.</td></tr>
+    </tbody>
+  </table></div>
 </div>
 
-<!-- SITE PHOTOS -->
 <div class="section">
-  <h2>Progress Photos (Apr 29 &mdash; via Dropbox)</h2>
+  <h2>Progress Photos</h2>
   <div class="two-col">
-    <div class="photo-placeholder">
-      <div style="font-size:2rem; margin-bottom:8px;">&#128247;</div>
-      <strong>Lot 3 &mdash; Framing Progress</strong><br>
-      Framing now COMPLETE. Frame &amp; structural inspections passed May 1.<br>
-      Roof decking visible, sheathing in progress.<br>
-      <em>Photos shared by Mark Ellenbogen via Dropbox (Apr 29)</em>
-    </div>
-    <div class="photo-placeholder">
-      <div style="font-size:2rem; margin-bottom:8px;">&#128247;</div>
-      <strong>Lot 7 &mdash; Foundation Progress</strong><br>
-      Foundation work continuing. ~60% complete.<br>
-      Approximately 30 days behind Lot 3 schedule.<br>
-      <em>Photos shared by Mark Ellenbogen via Dropbox (Apr 29)</em>
-    </div>
+    <div class="photo-placeholder"><div style="font-size:2rem; margin-bottom:8px;">&#128247;</div><strong>Lot 3 &mdash; Pre-Rough-In + Spec Lock-In</strong><br>Mark's May 11 site walk produced field measurements that were used to issue the cabinet package (May 14) and revised fireplace plans (May 12). Photos expected once Coast Lighting LV materials are on site.<br><em>Next photo set: Mark's June 7 re-walk.</em></div>
+    <div class="photo-placeholder"><div style="font-size:2rem; margin-bottom:8px;">&#128247;</div><strong>Lot 7 &mdash; Foundation</strong><br>No new photos this week. Last set Apr 29 via Dropbox.<br><em>Still ~30 days behind Lot 3.</em></div>
   </div>
 </div>
 
-<!-- CONTACT DIRECTORY -->
 <div class="section">
   <h2>Contact Directory</h2>
-  <div style="overflow-x:auto;">
-    <table>
-      <thead><tr><th>Name</th><th>Company</th><th>Role</th><th>Email</th><th>Phone</th></tr></thead>
-      <tbody>
-        <tr><td>Mark Ellenbogen</td><td>Tradewinds LLC</td><td>Design-Build-Manage</td><td>me@tradewinds-nj.com</td><td>(609) 828-0751</td></tr>
-        <tr><td>Humair Raza</td><td>Six Sigma Construction</td><td>General Contractor</td><td>humair@sixsigma.build</td><td>&mdash;</td></tr>
-        <tr><td>Efrain Osorio</td><td>Penguin Fireplace</td><td>Fireplace</td><td>efrain@penguinfireplace.com</td><td>(408) 910-1304</td></tr>
-        <tr><td>RJ Contreras</td><td>Abode Maison</td><td>Plumbing Selections</td><td>rj.contreras@abodemaison.com</td><td>(858) 349-1930</td></tr>
-        <tr><td>Yen Nguyen</td><td>Soleeva Energy</td><td>Solar</td><td>yen@soleeva.com</td><td>(408) 508-6769</td></tr>
-        <tr><td>Greg Belyavski</td><td>Coast Lighting</td><td>Electrical Fixtures</td><td>greg@coastlighting.com</td><td>&mdash;</td></tr>
-        <tr><td>Bill Schneider</td><td>Schneider Consulting</td><td>Landscape</td><td>wcschneider@yahoo.com</td><td>(650) 930-0165</td></tr>
-        <tr><td>Beth Swift</td><td>CA Bank of Commerce</td><td>Construction Lending</td><td>eswift@bankcbc.com</td><td>(858) 847-4759</td></tr>
-        <tr><td>Alan Katzman</td><td>Old Republic Title</td><td>Title</td><td>akatzman@ortc.com</td><td>(415) 248-7148</td></tr>
-        <tr><td>Amanda</td><td>Hanna Brunetti</td><td>Legal / Permits</td><td>amanda@hannabrunetti.com</td><td>&mdash;</td></tr>
-        <tr><td>Michel Cohen</td><td>PWI</td><td>Partner</td><td>michel@pwinv.com</td><td>&mdash;</td></tr>
-        <tr><td>Wolf Bielas</td><td>PWI</td><td>Partner</td><td>wolf@pwinv.com</td><td>(619) 857-0070</td></tr>
-        <tr><td>Edward Adato</td><td>WL Investments</td><td>Partner</td><td>edward@wlinv.com</td><td>&mdash;</td></tr>
-      </tbody>
-    </table>
-  </div>
+  <div style="overflow-x:auto;"><table>
+    <thead><tr><th>Name</th><th>Company</th><th>Role</th><th>Email</th><th>Phone</th></tr></thead>
+    <tbody>
+      <tr><td>Mark Ellenbogen</td><td>Tradewinds LLC</td><td>Design-Build-Manage</td><td>me@tradewinds-nj.com</td><td>(609) 828-0751</td></tr>
+      <tr><td>Humair Raza</td><td>Six Sigma Construction</td><td>General Contractor</td><td>humair@sixsigma.build</td><td>&mdash;</td></tr>
+      <tr><td>Khurram</td><td>Six Sigma Construction</td><td>Mechanical Lead</td><td>khurram@6sigmaconstruction.com</td><td>&mdash;</td></tr>
+      <tr><td>RJ Contreras</td><td>Abode Maison</td><td>Plumbing/Appliance Specs</td><td>rj.contreras@abodemaison.com</td><td>(858) 349-1930</td></tr>
+      <tr><td>Maria Contreras</td><td>Abode Maison</td><td>Selections</td><td>maria.contreras@abodemaison.com</td><td>&mdash;</td></tr>
+      <tr><td>Ifat</td><td>Quetzal Cabinets</td><td>Cabinet Fabricator</td><td>ifat@quetzalusa.com</td><td>&mdash;</td></tr>
+      <tr><td>Efrain Osorio</td><td>Penguin Fireplace</td><td>Fireplace</td><td>efrain@penguinfireplace.com</td><td>(408) 910-1304</td></tr>
+      <tr><td>Yen Nguyen</td><td>Soleeva Energy</td><td>Solar</td><td>yen@soleeva.com</td><td>(408) 508-6769</td></tr>
+      <tr><td>Greg Belyavski</td><td>Coast Lighting</td><td>Fixtures &amp; LV Lead</td><td>greg@coastlighting.com</td><td>&mdash;</td></tr>
+      <tr><td>Gabe Hernandez</td><td>Coast Lighting</td><td>LV / Smart Coverage</td><td>gabe@coastlighting.com</td><td>&mdash;</td></tr>
+      <tr><td>Tyler Carpenter</td><td>Coast Lighting</td><td>LV / Smart Coverage</td><td>tyler@coastlighting.com</td><td>&mdash;</td></tr>
+      <tr><td>Fabian</td><td>FBN Electric</td><td>Electrical Sub</td><td>fbn_electric@hotmail.com</td><td>&mdash;</td></tr>
+      <tr><td>Jaclyn</td><td>Kohlsaat &amp; Associates</td><td>Architect / Fireplace Revisions</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><td>Omar</td><td>(HVAC vendor)</td><td>Range Hood Make-Up-Air</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><td>Steve Sahadi</td><td>(Fire systems)</td><td>Common-Area Fire Consultant</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><td>Bill Schneider</td><td>Schneider Consulting</td><td>Landscape</td><td>wcschneider@yahoo.com</td><td>(650) 930-0165</td></tr>
+      <tr><td>Beth Swift</td><td>CBC Bank</td><td>Construction Lending</td><td>eswift@bankcbc.com</td><td>(858) 847-4759</td></tr>
+      <tr><td>Alan Katzman</td><td>Old Republic Title</td><td>Title</td><td>akatzman@ortc.com</td><td>(415) 248-7148</td></tr>
+      <tr><td>Amanda</td><td>Hanna Brunetti</td><td>Legal / Permits</td><td>amanda@hannabrunetti.com</td><td>&mdash;</td></tr>
+      <tr><td>Milan</td><td>(Stair Fabricator)</td><td>Stair Skeleton</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><td>Michel Cohen</td><td>PWI</td><td>Partner</td><td>michel@pwinv.com</td><td>&mdash;</td></tr>
+      <tr><td>Wolf Bielas</td><td>PWI</td><td>Partner</td><td>wolf@pwinv.com</td><td>(619) 857-0070</td></tr>
+      <tr><td>Edward Adato</td><td>WL Investments</td><td>Partner</td><td>edward@wlinv.com</td><td>(619) 661-7200</td></tr>
+    </tbody>
+  </table></div>
 </div>
 
-<!-- FOOTER -->
+<div class="section">
+  <h2>Newly Discovered Contacts &amp; References (Wk 29)</h2>
+  <div style="overflow-x:auto;"><table>
+    <thead><tr><th>Name / Reference</th><th>Role</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Khurram (6 Sigma)</td><td>Mechanical Lead</td><td>Mark's May 12 partner follow-up + spec-binder fwd. Promoted to core team.</td></tr>
+      <tr><td>RJ Contreras (Abode Maison)</td><td>Owner &mdash; Plumbing/Appliance Specs</td><td>Source of May 12 spec binders (250 La Terra Ct).</td></tr>
+      <tr><td>Maria Contreras (Abode Maison)</td><td>Abode Maison</td><td>Cc on May 11 source email.</td></tr>
+      <tr><td>Ifat (Quetzal Cabinets)</td><td>Cabinet Fabricator</td><td>Recipient of May 14 field-measured layouts.</td></tr>
+      <tr><td>Jaclyn (Kohlsaat)</td><td>Architect &mdash; revised fireplace plans</td><td>Mentioned in May 12 spec-binder fwd.</td></tr>
+      <tr><td>Omar</td><td>HVAC vendor &mdash; range hood make-up-air</td><td>Mark's May 12 spec-binder fwd.</td></tr>
+      <tr><td>Steve Sahadi</td><td>Common-area fire-system consultant</td><td>Mark's May 12 partner follow-up.</td></tr>
+    </tbody>
+  </table></div>
+</div>
+
 <div class="footer">
-  Auto-generated by Cedarwood AI &bull; Week 27 &bull; May 4, 2026<br>
-  Data sources: Gmail, WhatsApp, Monday.com, Budget XLSX
+  Auto-generated by Cedarwood AI &bull; Week 29 &bull; May 18, 2026<br>
+  Data sources: Gmail (May 12&ndash;18), Week 28 recovery anchor, La Terra budget spreadsheet
 </div>
 
-</div><!-- /container -->
+</div>
 
 <script>
-// Sticky panel toggle
 function toggleSticky() {
   var panel = document.getElementById("stickyPanel");
   var btn = document.getElementById("toggleBtn");
@@ -479,7 +401,6 @@ function toggleSticky() {
   btn.textContent = panel.classList.contains("collapsed") ? "Expand" : "Collapse";
 }
 
-// Save notes to file
 function saveToFile() {
   var meeting = document.getElementById("noteMeeting").value;
   var humair = document.getElementById("noteHumair").value;
@@ -500,125 +421,36 @@ function saveToFile() {
   URL.revokeObjectURL(a.href);
 }
 
-// Copy to clipboard
 function copyToClipboard() {
   var meeting = document.getElementById("noteMeeting").value;
   var humair = document.getElementById("noteHumair").value;
   var thoughts = document.getElementById("noteThoughts").value;
   var changes = document.getElementById("noteChanges").value;
   var content = "MEETING NOTES:\n" + meeting + "\n\nQUESTIONS FOR HUMAIR:\n" + humair + "\n\nMY THOUGHTS:\n" + thoughts + "\n\nCHANGES FOR NEXT REPORT:\n" + changes;
-  navigator.clipboard.writeText(content).then(function() {
-    alert("Notes copied to clipboard!");
-  });
+  navigator.clipboard.writeText(content).then(function() { alert("Notes copied to clipboard!"); });
 }
 
-// LocalStorage persistence for sticky notes
 var noteIds = ["noteMeeting", "noteHumair", "noteThoughts", "noteChanges"];
 noteIds.forEach(function(id) {
   var el = document.getElementById(id);
-  var saved = localStorage.getItem("laterra_w27_" + id);
+  var saved = localStorage.getItem("laterra_w29_" + id);
   if (saved) el.value = saved;
-  el.addEventListener("input", function() {
-    localStorage.setItem("laterra_w27_" + id, el.value);
-  });
+  el.addEventListener("input", function() { localStorage.setItem("laterra_w29_" + id, el.value); });
 });
 
-// ===== GANTT CHARTS =====
-function monthToTimestamp(year, month) {
-  return new Date(year, month - 1, 1).getTime();
-}
+function monthToTimestamp(year, month) { return new Date(year, month - 1, 1).getTime(); }
 
-var TODAY = new Date(2026, 4, 4).getTime(); // May 4, 2026
+var TODAY = new Date(2026, 4, 18).getTime();
 
-// Lot 3 Gantt
-var lot3Labels = [
-  "Sitework/Grading",
-  "Foundation",
-  "Framing",
-  "Ext Envelope",
-  "Rough Trades",
-  "Interior Finishes",
-  "Landscaping",
-  "Punch/CO"
-];
+var lot3Labels = ["Sitework/Grading","Foundation","Framing","Ext Envelope","Rough Trades","Interior Finishes","Landscaping","Punch/CO"];
+var lot3Starts = [monthToTimestamp(2025,10),monthToTimestamp(2026,1),monthToTimestamp(2026,4),monthToTimestamp(2026,7),monthToTimestamp(2026,9),monthToTimestamp(2026,11),monthToTimestamp(2027,2),monthToTimestamp(2027,3)];
+var lot3Ends = [monthToTimestamp(2026,1),monthToTimestamp(2026,5),monthToTimestamp(2026,8),monthToTimestamp(2026,10),monthToTimestamp(2026,12),monthToTimestamp(2027,3),monthToTimestamp(2027,4),monthToTimestamp(2027,4)];
+var lot3Colors = ["#10b981","#10b981","#10b981","#2563eb","#2563eb","#94a3b8","#94a3b8","#94a3b8"];
 
-var lot3Starts = [
-  monthToTimestamp(2025, 10),
-  monthToTimestamp(2026, 1),
-  monthToTimestamp(2026, 4),
-  monthToTimestamp(2026, 7),
-  monthToTimestamp(2026, 9),
-  monthToTimestamp(2026, 11),
-  monthToTimestamp(2027, 2),
-  monthToTimestamp(2027, 3)
-];
-
-var lot3Ends = [
-  monthToTimestamp(2026, 1),
-  monthToTimestamp(2026, 5),
-  monthToTimestamp(2026, 8),
-  monthToTimestamp(2026, 10),
-  monthToTimestamp(2026, 12),
-  monthToTimestamp(2027, 3),
-  monthToTimestamp(2027, 4),
-  monthToTimestamp(2027, 4)
-];
-
-var lot3Colors = [
-  "#10b981",
-  "#10b981",
-  "#10b981",
-  "#2563eb",
-  "#2563eb",
-  "#94a3b8",
-  "#94a3b8",
-  "#94a3b8"
-];
-
-// Lot 7 Gantt
-var lot7Labels = [
-  "Sitework/Grading",
-  "Foundation",
-  "Framing",
-  "Ext Envelope",
-  "Rough Trades",
-  "Interior Finishes",
-  "Landscaping",
-  "Punch/CO"
-];
-
-var lot7Starts = [
-  monthToTimestamp(2025, 11),
-  monthToTimestamp(2026, 2),
-  monthToTimestamp(2026, 6),
-  monthToTimestamp(2026, 9),
-  monthToTimestamp(2026, 11),
-  monthToTimestamp(2027, 1),
-  monthToTimestamp(2027, 4),
-  monthToTimestamp(2027, 5)
-];
-
-var lot7Ends = [
-  monthToTimestamp(2026, 2),
-  monthToTimestamp(2026, 7),
-  monthToTimestamp(2026, 10),
-  monthToTimestamp(2026, 12),
-  monthToTimestamp(2027, 2),
-  monthToTimestamp(2027, 5),
-  monthToTimestamp(2027, 6),
-  monthToTimestamp(2027, 6)
-];
-
-var lot7Colors = [
-  "#10b981",
-  "#2563eb",
-  "#94a3b8",
-  "#94a3b8",
-  "#94a3b8",
-  "#94a3b8",
-  "#94a3b8",
-  "#94a3b8"
-];
+var lot7Labels = ["Sitework/Grading","Foundation","Framing","Ext Envelope","Rough Trades","Interior Finishes","Landscaping","Punch/CO"];
+var lot7Starts = [monthToTimestamp(2025,11),monthToTimestamp(2026,2),monthToTimestamp(2026,6),monthToTimestamp(2026,9),monthToTimestamp(2026,11),monthToTimestamp(2027,1),monthToTimestamp(2027,4),monthToTimestamp(2027,5)];
+var lot7Ends = [monthToTimestamp(2026,2),monthToTimestamp(2026,7),monthToTimestamp(2026,10),monthToTimestamp(2026,12),monthToTimestamp(2027,2),monthToTimestamp(2027,5),monthToTimestamp(2027,6),monthToTimestamp(2027,6)];
+var lot7Colors = ["#10b981","#2563eb","#94a3b8","#94a3b8","#94a3b8","#94a3b8","#94a3b8","#94a3b8"];
 
 function buildGanttDatasets(starts, ends, colors, labels) {
   var datasets = [];
@@ -627,20 +459,11 @@ function buildGanttDatasets(starts, ends, colors, labels) {
       label: labels[i],
       data: (function(idx, s, e, len) {
         var arr = [];
-        for (var j = 0; j < len; j++) {
-          if (j === idx) {
-            arr.push([s, e]);
-          } else {
-            arr.push(null);
-          }
-        }
+        for (var j = 0; j < len; j++) { if (j === idx) { arr.push([s, e]); } else { arr.push(null); } }
         return arr;
       })(i, starts[i], ends[i], labels.length),
       backgroundColor: colors[i],
-      borderRadius: 4,
-      borderSkipped: false,
-      barPercentage: 0.65,
-      categoryPercentage: 0.8
+      borderRadius: 4, borderSkipped: false, barPercentage: 0.65, categoryPercentage: 0.8
     });
   }
   return datasets;
@@ -652,24 +475,15 @@ var ganttMaxLot7 = monthToTimestamp(2027, 8);
 
 function makeGanttOptions(maxVal) {
   return {
-    indexAxis: "y",
-    responsive: true,
-    maintainAspectRatio: false,
+    indexAxis: "y", responsive: true, maintainAspectRatio: false,
     plugins: {
       legend: { display: false },
       tooltip: {
         callbacks: {
-          title: function(items) {
-            if (items.length > 0) {
-              return items[0].dataset.label;
-            }
-            return "";
-          },
+          title: function(items) { if (items.length > 0) return items[0].dataset.label; return ""; },
           label: function(ctx) {
-            var raw = ctx.raw;
-            if (!raw) return "";
-            var s = new Date(raw[0]);
-            var e = new Date(raw[1]);
+            var raw = ctx.raw; if (!raw) return "";
+            var s = new Date(raw[0]); var e = new Date(raw[1]);
             var fmt = function(d) { return d.toLocaleDateString("en-US", { month: "short", year: "numeric" }); };
             return fmt(s) + " - " + fmt(e);
           }
@@ -678,70 +492,31 @@ function makeGanttOptions(maxVal) {
       annotation: {
         annotations: {
           todayLine: {
-            type: "line",
-            xMin: TODAY,
-            xMax: TODAY,
-            borderColor: "#dc2626",
-            borderWidth: 2,
-            borderDash: [6, 4],
-            label: {
-              display: true,
-              content: "TODAY",
-              position: "start",
-              backgroundColor: "#dc2626",
-              color: "#fff",
-              font: { size: 11, weight: "bold" }
-            }
+            type: "line", xMin: TODAY, xMax: TODAY,
+            borderColor: "#dc2626", borderWidth: 2, borderDash: [6, 4],
+            label: { display: true, content: "TODAY", position: "start", backgroundColor: "#dc2626", color: "#fff", font: { size: 11, weight: "bold" } }
           }
         }
       }
     },
     scales: {
-      x: {
-        type: "linear",
-        min: ganttMin,
-        max: maxVal,
-        ticks: {
-          callback: function(value) {
-            var d = new Date(value);
-            return d.toLocaleDateString("en-US", { month: "short", year: "2-digit" });
-          },
-          stepSize: 30 * 24 * 60 * 60 * 1000 * 2
-        },
+      x: { type: "linear", min: ganttMin, max: maxVal,
+        ticks: { callback: function(value) { var d = new Date(value); return d.toLocaleDateString("en-US", { month: "short", year: "2-digit" }); }, stepSize: 30*24*60*60*1000*2 },
         grid: { color: "#e2e8f0" }
       },
-      y: {
-        ticks: { font: { size: 11 } },
-        grid: { display: false }
-      }
+      y: { ticks: { font: { size: 11 } }, grid: { display: false } }
     }
   };
 }
 
-// Build charts on load
 window.addEventListener("DOMContentLoaded", function() {
   var ctx3 = document.getElementById("ganttLot3");
   if (ctx3) {
-    new Chart(ctx3.getContext("2d"), {
-      type: "bar",
-      data: {
-        labels: lot3Labels,
-        datasets: buildGanttDatasets(lot3Starts, lot3Ends, lot3Colors, lot3Labels)
-      },
-      options: makeGanttOptions(ganttMaxLot3)
-    });
+    new Chart(ctx3.getContext("2d"), { type: "bar", data: { labels: lot3Labels, datasets: buildGanttDatasets(lot3Starts, lot3Ends, lot3Colors, lot3Labels) }, options: makeGanttOptions(ganttMaxLot3) });
   }
-
   var ctx7 = document.getElementById("ganttLot7");
   if (ctx7) {
-    new Chart(ctx7.getContext("2d"), {
-      type: "bar",
-      data: {
-        labels: lot7Labels,
-        datasets: buildGanttDatasets(lot7Starts, lot7Ends, lot7Colors, lot7Labels)
-      },
-      options: makeGanttOptions(ganttMaxLot7)
-    });
+    new Chart(ctx7.getContext("2d"), { type: "bar", data: { labels: lot7Labels, datasets: buildGanttDatasets(lot7Starts, lot7Ends, lot7Colors, lot7Labels) }, options: makeGanttOptions(ganttMaxLot7) });
   }
 });
 </script>
